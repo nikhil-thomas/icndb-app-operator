@@ -33,8 +33,22 @@ spec:
               description: Funpods specify number of replicas in the deployment created
               format: int32
               type: integer
+            params:
+              description: Params specify additional configuration if required
+              items:
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+                required:
+                - key
+                - value
+                type: object
+              type: array
           required:
           - funpods
+          - params
           type: object
         status:
           properties:

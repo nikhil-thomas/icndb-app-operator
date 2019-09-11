@@ -12,6 +12,13 @@ import (
 type FunAppSpec struct {
 	// Funpods specify number of replicas in the deployment created
 	Funpods int32 `json:"funpods"`
+	// Params specify additional configuration if required
+	Params []Param `json:"params"`
+}
+
+type Param struct {
+	Key string `json:"key"`
+	Value string `json:"value"`
 }
 
 // FunAppStatus defines the observed state of FunApp

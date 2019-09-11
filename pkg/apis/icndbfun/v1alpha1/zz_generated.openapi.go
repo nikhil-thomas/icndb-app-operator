@@ -73,11 +73,25 @@ func schema_pkg_apis_icndbfun_v1alpha1_FunAppSpec(ref common.ReferenceCallback) 
 							Format:      "int32",
 						},
 					},
+					"params": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Params specify additional configuration if required",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/nikhil-thomas/icndb-app-operator/pkg/apis/icndbfun/v1alpha1.Param"),
+									},
+								},
+							},
+						},
+					},
 				},
-				Required: []string{"funpods"},
+				Required: []string{"funpods", "params"},
 			},
 		},
-		Dependencies: []string{},
+		Dependencies: []string{
+			"github.com/nikhil-thomas/icndb-app-operator/pkg/apis/icndbfun/v1alpha1.Param"},
 	}
 }
 
