@@ -28,6 +28,13 @@ spec:
         metadata:
           type: object
         spec:
+          properties:
+            funpods:
+              description: Funpods specify number of replicas in the deployment created
+              format: int32
+              type: integer
+          required:
+          - funpods
           type: object
         status:
           type: object

@@ -10,9 +10,8 @@ import (
 // FunAppSpec defines the desired state of FunApp
 // +k8s:openapi-gen=true
 type FunAppSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+	// Funpods specify number of replicas in the deployment created
+	Funpods int32 `json:"funpods"`
 }
 
 // FunAppStatus defines the observed state of FunApp

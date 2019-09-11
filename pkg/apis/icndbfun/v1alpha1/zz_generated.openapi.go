@@ -65,7 +65,16 @@ func schema_pkg_apis_icndbfun_v1alpha1_FunAppSpec(ref common.ReferenceCallback) 
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "FunAppSpec defines the desired state of FunApp",
-				Properties:  map[string]spec.Schema{},
+				Properties: map[string]spec.Schema{
+					"funpods": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Funpods specify number of replicas in the deployment created",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+				Required: []string{"funpods"},
 			},
 		},
 		Dependencies: []string{},
