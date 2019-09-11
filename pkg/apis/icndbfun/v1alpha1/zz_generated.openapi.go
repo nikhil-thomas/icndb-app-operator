@@ -86,7 +86,23 @@ func schema_pkg_apis_icndbfun_v1alpha1_FunAppStatus(ref common.ReferenceCallback
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Description: "FunAppStatus defines the observed state of FunApp",
-				Properties:  map[string]spec.Schema{},
+				Properties: map[string]spec.Schema{
+					"podnames": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Podnames list all the pods created for FunApp",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"podnames"},
 			},
 		},
 		Dependencies: []string{},

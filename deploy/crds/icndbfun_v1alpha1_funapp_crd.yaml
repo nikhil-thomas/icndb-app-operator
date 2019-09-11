@@ -37,6 +37,14 @@ spec:
           - funpods
           type: object
         status:
+          properties:
+            podnames:
+              description: Podnames list all the pods created for FunApp
+              items:
+                type: string
+              type: array
+          required:
+          - podnames
           type: object
   version: v1alpha1
   versions:
