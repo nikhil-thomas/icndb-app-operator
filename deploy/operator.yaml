@@ -16,15 +16,13 @@ spec:
       containers:
         - name: icndb-app-operator
           # Replace this with the built image name
-          image: nikhilvep/icndb-app-operator:0.1
+          image: nikhilvep/icndb-app-operator:version-1.0
           command:
           - icndb-app-operator
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
+              value: ""
             - name: POD_NAME
               valueFrom:
                 fieldRef:
