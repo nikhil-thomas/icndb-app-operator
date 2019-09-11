@@ -1,0 +1,7 @@
+apiVersion: icndbfun.dev/v1alpha1
+kind: FunApp
+metadata:
+  name: example-funapp
+spec:
+  # Add fields here
+  size: 3
