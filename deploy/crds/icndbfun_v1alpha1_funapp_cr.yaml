@@ -3,5 +3,4 @@ kind: FunApp
 metadata:
   name: example-funapp
 spec:
-  # Add fields here
-  size: 3
+  funpods: 10
