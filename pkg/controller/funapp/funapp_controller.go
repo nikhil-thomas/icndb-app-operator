@@ -198,14 +198,17 @@ func (r *ReconcileFunApp) deploymentForFunApp(fa *icndbfunv1alpha1.FunApp) *apps
 	ls := labelsForFunApp(fa.Name)
 	replicas := fa.Spec.Funpods
 
-	args := []string{}
+	names := ""
 	for _, param := range fa.Spec.Params {
 		if strings.EqualFold(param.Key, "Name") {
-			args = append(args, "--name")
-			args = append(args, param.Value)
-			break
+			if names != "" {
+				names +=  ","
+			}
+			names += param.Value
+
 		}
 	}
+	args := []string{"--names",  names}
 
 	reqLogger.Info("::::::::::::::::",  "ards:", args )
 
@@ -225,7 +228,7 @@ func (r *ReconcileFunApp) deploymentForFunApp(fa *icndbfunv1alpha1.FunApp) *apps
 				},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{{
-						Image: "nikhilvep/icndb-app:version-2.0",
+						Image: "nikhilvep/icndb-app:version-exp",
 						Name: "icndb-server",
 						Args: args,
 						Ports: []corev1.ContainerPort{{

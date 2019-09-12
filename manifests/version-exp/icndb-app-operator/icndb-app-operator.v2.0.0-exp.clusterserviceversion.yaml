@@ -1,0 +1,132 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[{"apiVersion":"icndbfun.dev/v1alpha1","kind":"FunApp","metadata":{"name":"devopsday-funapp"},"spec":{"funpods":4,"params":[{"key":"Name","value":"Superstar
+      Rajnikanth"},{"key":"Name","value":"Chuck Norris"},{"key":"Name","value":"John
+      Abraham"}]}}]'
+    capabilities: Basic Install
+  name: icndb-app-operator.v2.0.0-exp
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: Create an instance of FUnApp CRD to launch FunApp in this namespace
+      displayName: FunApp CRD
+      kind: FunApp
+      name: funapps.icndbfun.dev
+      version: v1alpha1
+  description: Icndb App Operator manages the lifecycle of ICNDB App https://github.com/nikhil-thomas/icndp-app
+  displayName: Icndb App Operator
+  install:
+    spec:
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - '*'
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - '*'
+        - apiGroups:
+          - monitoring.coreos.com
+          resources:
+          - servicemonitors
+          verbs:
+          - get
+          - create
+        - apiGroups:
+          - apps
+          resourceNames:
+          - icndb-app-operator
+          resources:
+          - deployments/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          verbs:
+          - get
+        - apiGroups:
+          - apps
+          resources:
+          - replicasets
+          verbs:
+          - get
+        - apiGroups:
+          - icndbfun.dev
+          resources:
+          - '*'
+          verbs:
+          - '*'
+        serviceAccountName: icndb-app-operator
+      deployments:
+      - name: icndb-app-operator
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              name: icndb-app-operator
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                name: icndb-app-operator
+            spec:
+              containers:
+              - command:
+                - icndb-app-operator
+                env:
+                - name: WATCH_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.annotations['olm.targetNamespaces']
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: OPERATOR_NAME
+                  value: icndb-app-operator
+                image: nikhilvep/icndb-app-operator:version-exp
+                imagePullPolicy: Always
+                name: icndb-app-operator
+                resources: {}
+              serviceAccountName: icndb-app-operator
+    strategy: deployment
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: true
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - olm-example
+  maintainers:
+  - email: nikhilthomas1@gmail.com
+    name: Nikhil Thomas
+  maturity: alpha
+  provider:
+    name: Nikhil Thomas
+  replaces: icndb-app-operator.v2.0.0
+  version: 2.0.0-exp

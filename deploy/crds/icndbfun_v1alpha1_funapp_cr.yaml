@@ -5,5 +5,9 @@ metadata:
 spec:
   funpods: 4
   params:
-    - key: Name
-      value: Superstar Rajnikanth
+  - key: Name
+    value: Superstar Rajnikanth
+  - key: Name
+    value: Chuck Norris
+  - key: Name
+    value: John Abraham
