@@ -4,3 +4,6 @@ metadata:
   name: devopsday-funapp
 spec:
   funpods: 4
+  params:
+    - key: Name
+      value: Superstar Rajnikanth

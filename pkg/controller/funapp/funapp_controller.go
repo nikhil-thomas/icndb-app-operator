@@ -6,6 +6,7 @@ import (
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+	"strings"
 
 	icndbfunv1alpha1 "github.com/nikhil-thomas/icndb-app-operator/pkg/apis/icndbfun/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
@@ -190,8 +191,23 @@ func (r *ReconcileFunApp) Reconcile(request reconcile.Request) (reconcile.Result
 
 // deploymentForFunApp returns a memcached Deployment object
 func (r *ReconcileFunApp) deploymentForFunApp(fa *icndbfunv1alpha1.FunApp) *appsv1.Deployment {
+
+	reqLogger := log.WithValues("Request.Namespace", fa.Namespace, "Request.Name", fa.Name)
+	reqLogger.Info("creating deployment FunApp")
+
 	ls := labelsForFunApp(fa.Name)
 	replicas := fa.Spec.Funpods
+
+	args := []string{}
+	for _, param := range fa.Spec.Params {
+		if strings.EqualFold(param.Key, "Name") {
+			args = append(args, "--name")
+			args = append(args, param.Value)
+			break
+		}
+	}
+
+	reqLogger.Info("::::::::::::::::",  "ards:", args )
 
 	dep := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
@@ -209,8 +225,9 @@ func (r *ReconcileFunApp) deploymentForFunApp(fa *icndbfunv1alpha1.FunApp) *apps
 				},
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{{
-						Image:   "nikhilvep/icndb-app:version-1.0",
-						Name:    "icndb-server",
+						Image: "nikhilvep/icndb-app:version-2.0",
+						Name: "icndb-server",
+						Args: args,
 						Ports: []corev1.ContainerPort{{
 							ContainerPort: 8000,
 						}},

@@ -16,7 +16,7 @@ spec:
       containers:
         - name: icndb-app-operator
           # Replace this with the built image name
-          image: nikhilvep/icndb-app-operator:version-1.0
+          image: nikhilvep/icndb-app-operator:version-2.0
           command:
           - icndb-app-operator
           imagePullPolicy: Always
