@@ -1,0 +1,67 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: funapps.icndbfun.dev
+spec:
+  group: icndbfun.dev
+  names:
+    kind: FunApp
+    listKind: FunAppList
+    plural: funapps
+    singular: funapp
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            funpods:
+              description: Funpods specify number of replicas in the deployment created
+              format: int32
+              type: integer
+            params:
+              description: Params specify additional configuration if required
+              items:
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+                required:
+                - key
+                - value
+                type: object
+              type: array
+          required:
+          - funpods
+          - params
+          type: object
+        status:
+          properties:
+            podnames:
+              description: Podnames list all the pods created for FunApp
+              items:
+                type: string
+              type: array
+          required:
+          - podnames
+          type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
