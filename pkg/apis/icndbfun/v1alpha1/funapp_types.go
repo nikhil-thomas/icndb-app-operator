@@ -13,7 +13,7 @@ type FunAppSpec struct {
 	// Funpods specify number of replicas in the deployment created
 	Funpods int32 `json:"funpods"`
 	// Params specify additional configuration if required
-	Params []Param `json:"params"`
+	Params []Param `json:"params,omitempty"`
 }
 
 type Param struct {

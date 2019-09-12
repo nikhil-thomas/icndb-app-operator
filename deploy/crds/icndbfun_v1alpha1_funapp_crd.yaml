@@ -48,7 +48,6 @@ spec:
               type: array
           required:
           - funpods
-          - params
           type: object
         status:
           properties:

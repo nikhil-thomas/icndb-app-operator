@@ -87,7 +87,7 @@ func schema_pkg_apis_icndbfun_v1alpha1_FunAppSpec(ref common.ReferenceCallback) 
 						},
 					},
 				},
-				Required: []string{"funpods", "params"},
+				Required: []string{"funpods"},
 			},
 		},
 		Dependencies: []string{
