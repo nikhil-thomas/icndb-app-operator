@@ -110,14 +110,14 @@ spec:
                 serviceAccountName: icndb-app-operator
     strategy: deployment
   installModes:
-    - supported: true
-      type: OwnNamespace
-    - supported: false
-      type: SingleNamespace
-    - supported: true
-      type: MultiNamespace
-    - supported: true
-      type: AllNamespaces
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: false
+    type: AllNamespaces
   maturity: alpha
   provider:
     name: Nikhil Thomas
