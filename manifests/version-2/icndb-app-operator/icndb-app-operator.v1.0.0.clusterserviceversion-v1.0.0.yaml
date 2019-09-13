@@ -3,7 +3,7 @@ kind: ClusterServiceVersion
 metadata:
   annotations:
     alm-examples: '[{"apiVersion":"icndbfun.dev/v1alpha1","kind":"FunApp","metadata":{"name":"devopsday-funapp"},"spec":{"funpods":4}}]'
-    capabilities: Basic Install
+    capabilities: Seamless Upgrades
   name: icndb-app-operator.v1.0.0
   namespace: placeholder
 spec:
@@ -117,6 +117,7 @@ spec:
   - supported: false
     type: MultiNamespace
   - supported: false
+    type: AllNamespaces
   maturity: alpha
   provider:
     name: Nikhil Thomas

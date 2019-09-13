@@ -4,7 +4,7 @@ metadata:
   annotations:
     alm-examples: '[{"apiVersion":"icndbfun.dev/v1alpha1","kind":"FunApp","metadata":{"name":"devopsday-funapp"},"spec":{"funpods":4,"params":[{"key":"Name","value":"Superstar
       Rajnikanth"}]}}]'
-    capabilities: Basic Install
+    capabilities: Seamless Upgrades
   name: icndb-app-operator.v2.0.0
   namespace: placeholder
 spec:
