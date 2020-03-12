@@ -198,17 +198,8 @@ func (r *ReconcileFunApp) deploymentForFunApp(fa *icndbfunv1alpha1.FunApp) *apps
 	ls := labelsForFunApp(fa.Name)
 	replicas := fa.Spec.Funpods
 
-	names := ""
-	for _, param := range fa.Spec.Params {
-		if strings.EqualFold(param.Key, "Name") {
-			if names != "" {
-				names +=  ","
-			}
-			names += param.Value
 
-		}
-	}
-	args := []string{"--names",  names}
+	args := getPeopleNames(fa)
 
 	reqLogger.Info("::::::::::::::::",  "ards:", args )
 
@@ -282,4 +273,19 @@ func getPodNames(pods []corev1.Pod) []string {
 		podNames = append(podNames, pod.Name)
 	}
 	return podNames
+}
+
+func getPeopleNames(fa *icndbfunv1alpha1.FunApp) []string {
+	names := ""
+	for _, param := range fa.Spec.Params {
+		if strings.EqualFold(param.Key, "Name") {
+			if names != "" {
+				names +=  ","
+			}
+			names += param.Value
+
+		}
+	}
+	args := []string{"--names",  names}
+	return args
 }

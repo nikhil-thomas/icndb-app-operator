@@ -1,7 +1,6 @@
 module github.com/nikhil-thomas/icndb-app-operator
 
 require (
-	github.com/NYTimes/gziphandler v1.0.1 // indirect
 	github.com/operator-framework/operator-sdk v0.10.1-0.20190911145116-334c667503d0
 	github.com/spf13/pflag v1.0.3
 	google.golang.org/api v0.3.0
@@ -29,3 +28,5 @@ replace (
 )
 
 replace github.com/operator-framework/operator-sdk => github.com/operator-framework/operator-sdk v0.9.0
+
+go 1.13
